@@ -56,6 +56,25 @@ func handleUpdate(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	} else if strings.Contains(text, "2pm") {
 		log.Println("Trigger: 2pm")
 		sendAudio(bot, update.Message.Chat.ID, "2pm.mp3")
+
+	} else if strings.Contains(text, "devilz") {
+		log.Println("Trigger: devilz")
+		sendAudio(bot, update.Message.Chat.ID, "devilz.mp3")
+	} else if strings.Contains(text, "beez") {
+		log.Println("Trigger: beez")
+		sendAudio(bot, update.Message.Chat.ID, "beez.mp3")
+	} else if strings.Contains(text, "whadiya") {
+		log.Println("Trigger: whadiya")
+		sendAudio(bot, update.Message.Chat.ID, "whadiya.mp3")
+	} else if strings.Contains(text, "outtahere") {
+		log.Println("Trigger: outtahere")
+		sendAudio(bot, update.Message.Chat.ID, "outtahere.mp3")
+	} else if strings.Contains(text, "kill cunts") {
+		log.Println("Trigger: killcunts")
+		sendAudio(bot, update.Message.Chat.ID, "killCunts.mp3")
+	} else if strings.Contains(text, "fuckye") {
+		log.Println("Trigger: fuckye")
+		sendAudio(bot, update.Message.Chat.ID, "fuckye.mp3")
 	} else if strings.Contains(text, "doctah") {
 		log.Println("Trigger: doctah")
 		sendAudio(bot, update.Message.Chat.ID, "doctah.mp3")
