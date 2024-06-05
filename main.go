@@ -47,52 +47,33 @@ func handleUpdate(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	text := strings.ToLower(update.Message.Text)
 	log.Printf("Processing message from chat %d: %s", update.Message.Chat.ID, text)
 
-	if strings.Contains(text, "lightweight") {
-		log.Println("Trigger: lightweight")
-		sendAudio(bot, update.Message.Chat.ID, "lightweight.mp3")
-	} else if strings.Contains(text, "pilgrims") {
-		log.Println("Trigger: pilgrims")
-		sendAudio(bot, update.Message.Chat.ID, "ask-the-pilgrims.mp3")
-	} else if strings.Contains(text, "2pm") {
-		log.Println("Trigger: 2pm")
-		sendAudio(bot, update.Message.Chat.ID, "2pm.mp3")
-
-	} else if strings.Contains(text, "devilz") {
-		log.Println("Trigger: devilz")
-		sendAudio(bot, update.Message.Chat.ID, "devilz.mp3")
-	} else if strings.Contains(text, "beez") {
-		log.Println("Trigger: beez")
-		sendAudio(bot, update.Message.Chat.ID, "beez.mp3")
-	} else if strings.Contains(text, "whadiya") {
-		log.Println("Trigger: whadiya")
-		sendAudio(bot, update.Message.Chat.ID, "whadiya.mp3")
-	} else if strings.Contains(text, "outtahere") {
-		log.Println("Trigger: outtahere")
-		sendAudio(bot, update.Message.Chat.ID, "outtahere.mp3")
-	} else if strings.Contains(text, "kill cunts") {
-		log.Println("Trigger: killcunts")
-		sendAudio(bot, update.Message.Chat.ID, "killCunts.mp3")
-	} else if strings.Contains(text, "fuckye") {
-		log.Println("Trigger: fuckye")
-		sendAudio(bot, update.Message.Chat.ID, "fuckye.mp3")
-	} else if strings.Contains(text, "doctah") {
-		log.Println("Trigger: doctah")
-		sendAudio(bot, update.Message.Chat.ID, "doctah.mp3")
-	} else if strings.Contains(text, "knowledge") {
-		log.Println("Trigger: knowledge")
-		sendAudio(bot, update.Message.Chat.ID, "dropKnowledge.mp3")
-	} else if strings.Contains(text, "sound2") {
-		log.Println("Trigger: sound2")
-		sendAudio(bot, update.Message.Chat.ID, "so")
-	} else if strings.Contains(text, "sound2") {
-		log.Println("Trigger: sound2")
-		sendAudio(bot, update.Message.Chat.ID, "so")
-	} else if strings.Contains(text, "sound2") {
-		log.Println("Trigger: sound2")
-		sendAudio(bot, update.Message.Chat.ID, "so")
-	} else {
-		log.Printf("No trigger found in message: %s", text)
+	// Map of trigger words to their corresponding audio file paths
+	triggers := map[string]string{
+		"lightweight": "lightweight.mp3",
+		"pilgrims":    "ask-the-pilgrims.mp3",
+		"2pm":         "2pm.mp3",
+		"devilz":      "devilz.mp3",
+		"beez":        "beez.mp3",
+		"whadiya":     "whadiya.mp3",
+		"outtahere":   "outtahere.mp3",
+		"kill cunts":  "killCunts.mp3",
+		"fuckye":      "fuckye.mp3",
+		"fishy":       "fishy.mp3",
+		"wut":         "wut.mp3",
+		"wer u be":    "werube.mp3",
+		"doctah":      "doctah.mp3",
+		"knowledge":   "dropKnowledge.mp3",
 	}
+
+	for trigger, filePath := range triggers {
+		if strings.Contains(text, trigger) {
+			log.Printf("Trigger: %s", trigger)
+			sendAudio(bot, update.Message.Chat.ID, filePath)
+			return
+		}
+	}
+
+	log.Printf("No trigger found in message: %s", text)
 }
 
 func sendAudio(bot *tgbotapi.BotAPI, chatID int64, filePath string) {
