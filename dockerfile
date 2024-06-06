@@ -1,8 +1,11 @@
 # Stage 1: Build the Go app
-FROM golang:1.22 AS builder
+FROM golang:1.22.2-alpine AS builder
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
+
+# Install git
+RUN apk add --no-cache git
 
 # Copy go mod and sum files
 COPY go.mod go.sum ./
@@ -14,9 +17,9 @@ RUN go mod download
 COPY . .
 
 # Build the Go app
-RUN go build -o soundboardBot
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o soundboardBot .
 
-# Stage 2: A minimal image with the app binary
+# Stage 2: A minimal image with the app binary and audio files
 FROM alpine:latest
 
 # Set the Current Working Directory inside the container
@@ -24,6 +27,9 @@ WORKDIR /root/
 
 # Copy the Pre-built binary file from the previous stage
 COPY --from=builder /app/soundboardBot .
+
+# Copy audio files
+COPY audio /root/audio
 
 # Command to run the executable
 CMD ["./soundboardBot"]

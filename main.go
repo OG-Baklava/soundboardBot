@@ -6,16 +6,10 @@ import (
 	"strings"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/joho/godotenv"
 )
 
 func main() {
-	// Load environment variables from .env file
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
+	// Get environment variables directly
 	botToken := os.Getenv("TELEGRAM_BOT_TOKEN")
 	if botToken == "" {
 		log.Fatal("TELEGRAM_BOT_TOKEN is not set")
@@ -49,28 +43,28 @@ func handleUpdate(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	// Map of trigger words to their corresponding audio file paths
 	triggers := map[string]string{
-		"lightweight":  "lightweight.mp3",
-		"pilgrims":     "ask-the-pilgrims.mp3",
-		"2pm":          "2pm.mp3",
-		"devilz":       "devilz.mp3",
-		"beez":         "beez.mp3",
-		"whadiya":      "whadiya.mp3",
-		"outtahere":    "outtahere.mp3",
-		"kill cunts":   "killCunts.mp3",
-		"fuck ye":      "fuckye.mp3",
-		"fishy":        "fishy.mp3",
-		"wut":          "wut.mp3",
-		"wer u be":     "werube.mp3",
-		"doctah":       "doctah.mp3",
-		"knowledge":    "dropKnowledge.mp3",
-		"fake news":    "fakeNews.mp3",
-		"silly woman":  "sillyWoman.mp3",
-		"bomb planted": "csBomb.mp3",
-		"nup yep":      "nupyep.mp3",
-		"not today":    "notToday.mp3",
-		"ye na":        "yena.mp3",
-		"gay cunt":     "gaycunt.mp3",
-		"blue cunts":   "blueCunts.mp3",
+		"lightweight":  "audio/lightweight.mp3",
+		"pilgrims":     "audio/ask-the-pilgrims.mp3",
+		"2pm":          "audio/2pm.mp3",
+		"devilz":       "audio/devilz.mp3",
+		"beez":         "audio/beez.mp3",
+		"whadiya":      "audio/whadiya.mp3",
+		"outtahere":    "audio/outtahere.mp3",
+		"kill cunts":   "audio/killCunts.mp3",
+		"fuck ye":      "audio/fuckye.mp3",
+		"fishy":        "audio/fishy.mp3",
+		"wut":          "audio/wut.mp3",
+		"wer u be":     "audio/werube.mp3",
+		"doctah":       "audio/doctah.mp3",
+		"knowledge":    "audio/dropKnowledge.mp3",
+		"fake news":    "audio/fakeNews.mp3",
+		"silly woman":  "audio/sillyWoman.mp3",
+		"bomb planted": "audio/csBomb.mp3",
+		"nup yep":      "audio/nupyep.mp3",
+		"not today":    "audio/notToday.mp3",
+		"ye na":        "audio/yena.mp3",
+		"gay cunt":     "audio/gaycunt.mp3",
+		"blue cunts":   "audio/blueCunts.mp3",
 	}
 
 	for trigger, filePath := range triggers {
